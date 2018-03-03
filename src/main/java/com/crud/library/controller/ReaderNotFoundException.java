@@ -1,4 +1,4 @@
 package com.crud.library.controller;
 
-public class ReaderNotFoundException {
+public class ReaderNotFoundException extends Exception {
 }

@@ -1,4 +1,4 @@
 package com.crud.library.controller;
 
-public class BookNotDFoundException extends Exception {
+public class BookNotFoundException extends Exception {
 }
