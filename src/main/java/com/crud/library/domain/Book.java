@@ -1,6 +1,10 @@
 package com.crud.library.domain;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @AllArgsConstructor
@@ -35,6 +40,7 @@ public class Book {
 
         @Column(name="DESCRIPTION")
         private String description;
+
 
         @Column(name="PURCHASE_DATE")
         private LocalDate purchaseDate;
