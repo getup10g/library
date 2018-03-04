@@ -1,6 +1,7 @@
 package com.crud.library.repository;
 
 import com.crud.library.domain.Book;
+import com.crud.library.domain.Reader;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
@@ -20,8 +21,6 @@ public interface BookRepository extends CrudRepository<Book, Long> {
     List<Book> findByAuthorContaining(String author);
 
     List<Book> findByYear(Integer Year);
-
-    List<Book> findByReaderId(Long id);
 
     void delete(Long id);
 

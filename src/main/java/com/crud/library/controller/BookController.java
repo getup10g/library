@@ -24,13 +24,13 @@ public class BookController {
     private BookMapper bookMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllBooks")
-    public List<BookDto> getBooks() {
+    public List<BookDto> getAllBooks() {
         return bookMapper.mapToBookDtoList(service.getAllBooks());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getBook")
-    public BookDto getBook(@RequestParam Long bookId) throws BookNotFoundException {
-        return bookMapper.mapToBookDto(service.getBook(bookId).orElseThrow(BookNotFoundException::new));
+    @RequestMapping(method = RequestMethod.GET, value = "getBookById")
+    public BookDto getBookById(@RequestParam Long bookId) {
+        return bookMapper.mapToBookDto(service.getBookById(bookId));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteBook")
@@ -42,6 +42,7 @@ public class BookController {
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         return bookMapper.mapToBookDto(service.saveBook(bookMapper.mapToBook(bookDto)));
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "createBook", consumes = APPLICATION_JSON_VALUE)
     public void createBook(@RequestBody BookDto bookDto) {
         service.saveBook(bookMapper.mapToBook(bookDto));
@@ -52,7 +53,7 @@ public class BookController {
         return bookMapper.mapToBookDtoList(service.getBooksByTitleContaining(title));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getBooksByAuthor")
+    @RequestMapping(method = RequestMethod.GET, value = "getBooksByAuthorContaining")
     public List<BookDto> getBooksByAuthorContaining(@RequestParam String author) {
         return bookMapper.mapToBookDtoList(service.getBooksByAuthorContaining(author));
     }
@@ -62,9 +63,9 @@ public class BookController {
         return bookMapper.mapToBookDtoList(service.getBooksByYear(year));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getBooksByReaderId")
+    /*@RequestMapping(method = RequestMethod.GET, value = "getBooksByReaderId")
     public List<BookDto> getBooksByReaderId(@RequestParam Long id) {
         return bookMapper.mapToBookDtoList(service.getBooksByReaderId(id));
-    }
+    }*/
 }
 

@@ -1,51 +1,42 @@
 package com.crud.library.domain;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Entity(name="books")
+@Entity
 public class Book {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-        //@OneToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-        @Column(name="READER_ID")
-        private Long readerId;
+    @Column(name = "TITLE")
+    private String title;
 
-        @Column(name="TITLE")
-        private String title;
+    @Column(name = "AUTHOR")
+    private String author;
 
-        @Column(name="AUTHOR")
-        private String author;
+    @Column(name = "YEAR")
+    private Integer year;
 
-        @Column(name="YEAR")
-        private Integer year;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
-        @Column(name="DESCRIPTION")
-        private String description;
+    @Column(name = "STATUS", nullable = false)
+    private Boolean status = true;
 
-
-        @Column(name="PURCHASE_DATE")
-        private LocalDate purchaseDate;
-
-        @Column(name="LOAN_DATE")
-        private LocalDate loanDate;
+    @OneToMany(mappedBy = "book")
+    private List<Reservation> reservations = new ArrayList<>();
 
 }
